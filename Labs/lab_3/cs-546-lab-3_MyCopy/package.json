@@ -1,0 +1,16 @@
+{
+  "name": "cs-546-lab-3",
+  "version": "0.0.1",
+  "description": "Lab 3 package for async functions. Contains app.js, fileData.js and textMetrics.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Neha Mansinghka",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "word-count": "^0.2.2",
+    "word-freq": "0.0.8"
+  }
+}
