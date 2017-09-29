@@ -80,5 +80,18 @@ const uuidv1 = require("uuid/v1");
         }
     
         return await this.getTask(taskId);
+  },
+
+  async removeTask(id){
+
+    if (!id) throw "You must provide an id to remove the task";
+
+    const taskCollection = await tasks();
+    const deletionTask = await taskCollection.removeOne({ _id: id });
+
+    if (deletionTask.deletedCount === 0) {
+      throw `Could not delete task with id of ${id}`;
+    }
+    return;
   }
 };
