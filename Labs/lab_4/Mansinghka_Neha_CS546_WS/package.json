@@ -1,0 +1,16 @@
+{
+  "name": "mansinghka_neha_cs546_ws",
+  "version": "0.0.1",
+  "description": "Lab4. Working with mongoDb to basic CRUD operations",
+  "dependencies": {
+    "mongodb": "^2.2.31",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Neha Mansinghka",
+  "license": "MIT"
+}
