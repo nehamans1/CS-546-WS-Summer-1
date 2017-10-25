@@ -1,7 +1,7 @@
 const recipeData = require("./recipes");
-//const userData = require("./users");
+const commentsData = require("./comments");
 
 module.exports = {
-    //users: userData,
+    comments: commentsData,
     recipes: recipeData
 };

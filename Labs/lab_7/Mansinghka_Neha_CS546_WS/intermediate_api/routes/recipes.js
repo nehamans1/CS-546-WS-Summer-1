@@ -19,8 +19,18 @@ function isEmpty(obj) {
   // Otherwise, does it have any properties of its own?
   // Note that this doesn't handle
   // toString and toValue enumeration bugs in IE < 9
-  for (var key in obj) {
+  /*for (var key in obj) {
       if (obj.hasOwnProperty(key)) return false;
+  }*/
+  if(Object.keys(obj).length<3)return false;
+
+  for (let j=0; j<Object.keys(obj).length; j++){
+    if(['title','ingredients','steps'].includes(Object.keys(obj)[j])){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   return true;
@@ -98,6 +108,20 @@ router.put("/:id", async (req, res) => {
     await recipeData.getRecipeById(req.params.id);
   } catch (e) {
     res.status(404).json({ error: "Recipe not found" });
+    return;
+  }
+
+  if(Object.keys(updatedData).length === 0){
+    res.status(400).json({ error: "No information provided for recipe update"});
+    return;
+  }
+
+  for (let j=0; j<Object.keys(updatedData).length; j++){
+    if(['title','ingredients','steps'].includes(Object.keys(updatedData)[j])){}
+    else{
+      res.status(400).json({ error: "Incorrect information provided for recipe update"});
+      return;
+    }
   }
 
   if(updatedData.title){
@@ -106,18 +130,17 @@ router.put("/:id", async (req, res) => {
       return;
     }
   }
-
   if(updatedData.ingredients){
     if(!Array.isArray(updatedData.ingredients) || updatedData.ingredients.length===0){
       res.status(400).json({ error: "Empty or incorrectly formatted ingredients provided for recipe update"});
       return;
     }
-    for (let i=0; i<updatedData.ingredients.length; i++){
-      if(!updatedData.ingredients[i].name||typeof(updatedData.ingredients[i].name)!="string"||updatedData.ingredients[i].name.length===0){
+    for (let k=0; k<updatedData.ingredients.length; k++){
+      if(!updatedData.ingredients[k].name||typeof(updatedData.ingredients[k].name)!="string"||updatedData.ingredients[k].name.length===0){
         res.status(400).json({ error: "Empty or incorrectly formatted ingredient name provided for recipe update"});
         return;
       }
-      if(!updatedData.ingredients[i].amount||typeof(updatedData.ingredients[i].amount)!="string"||updatedData.ingredients[i].amount.length===0){
+      if(!updatedData.ingredients[k].amount||typeof(updatedData.ingredients[k].amount)!="string"||updatedData.ingredients[k].amount.length===0){
         res.status(400).json({ error: "Empty or incorrectly formatted ingredient amount provided for recipe update"});
         return;
       }
@@ -144,6 +167,7 @@ router.delete("/:id", async (req, res) => {
     await recipeData.getRecipeById(req.params.id);
   } catch (e) {
     res.status(404).json({ error: "Recipe not found" });
+    return;
   }
   try {
     await recipeData.removeRecipe(req.params.id);
