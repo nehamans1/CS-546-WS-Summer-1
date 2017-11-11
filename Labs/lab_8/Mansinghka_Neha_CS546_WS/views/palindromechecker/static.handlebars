@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form id="static-form" method="post">
+      <div class="form-group">
+        <label for="text1">Enter string</label>
+        <input type="text" class="form-control" id="text1" name="text1" placeholder="String to be checked" value="{{textPalindrome}}">
+      </div>
+      <div class="form-group hidden" id="error-container">
+        <div class="alert alert-danger text-goes-here">
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+      <h2>List of Checked Strings</h2>
+        <ul class="is-palindrome" id="palindromelist">
+        </ul>
+        <ul class="not-palindrome" id="notpalindromelist">
+        </ul>
+    </form>
+  </div>
+</div>
